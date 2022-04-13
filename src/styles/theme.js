@@ -7,7 +7,7 @@ export const theme = {
   mainGrey: '#F7F7F7',
   darkGrey: '#797979',
 
-  fontLogo: "'Song Myung', 'serif'",
+  fontLogo: "'Song Myung', serif",
 
   fontLarge: '48px',
   fontMedium: '28px',
@@ -18,6 +18,7 @@ export const theme = {
 
   weightBold: 700,
   weightSemiBold: 600,
+  weightMiddle: 500,
   weightRegular: 400,
 
   absoluteCenter: css`
@@ -26,10 +27,7 @@ export const theme = {
     left: 50%;
     transform: translate(-50%, -50%);
   `,
-};
 
-export const mixins = {
-  // flex
   flexBox: (direction = 'row', align = 'center', justify = 'center') => `
     display: flex;
     flex-direction: ${direction};

@@ -1,16 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Router from './Router';
 import GlobalStyle from './styles/GlobalStyle';
-import { ThemeProvider } from 'styled-components';
-import { theme, mixins } from './styles/theme';
 
-ReactDOM.render(
-  <>
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
+import { createRoot } from 'react-dom/client';
+import { StyledEngineProvider } from '@mui/styled-engine';
+
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+root.render(
+  <StyledEngineProvider injectFirst>
     <GlobalStyle />
-    <ThemeProvider theme={{ ...theme, ...mixins }}>
+    <ThemeProvider theme={{ ...theme }}>
       <Router />
     </ThemeProvider>
-  </>,
-  document.getElementById('root')
+  </StyledEngineProvider>
 );
