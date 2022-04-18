@@ -11,6 +11,8 @@ export const HostingFooter = ({ goToNextStep, goToPrevStep }) => {
   );
 };
 
+export default HostingFooter;
+
 const RightFooter = styled.div`
   ${({ theme }) => theme.flexBox('', 'center', 'space-between')}
   position: fixed;
@@ -45,5 +47,3 @@ const GoNextBtn = styled.div`
   color: white;
   cursor: pointer;
 `;
-
-export default HostingFooter;

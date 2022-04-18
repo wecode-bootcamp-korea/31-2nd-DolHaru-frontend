@@ -1,7 +1,6 @@
-import React from 'react';
-import HostingMap from './HostingMap';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useToggle } from './../../../../hooks/useToggle';
+import HostingMap from './HostingMap';
 import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';

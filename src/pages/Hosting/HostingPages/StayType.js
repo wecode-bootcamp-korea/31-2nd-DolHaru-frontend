@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const PrivacyType = ({ newStayInfo }) => {
+export const StayType = ({ newStayInfo }) => {
   const updateStayType = e => {
     const { value } = e.target;
     newStayInfo.stayType = value;
@@ -17,7 +17,7 @@ export const PrivacyType = ({ newStayInfo }) => {
 };
 
 const InputBox = styled.form`
-  ${props => props.theme.flexBox('column', 'center', 'space-between')}
+  ${({ theme }) => theme.flexBox('column', 'center', 'space-between')}
   width: 100%;
   padding: 200px 120px;
   z-index: 3;
@@ -30,9 +30,9 @@ const OptionBtn = styled.input.attrs(props => ({ type: 'button' }))`
   padding: 35px 0 30px 35px;
   border: 2px solid lightgray;
   border-radius: 12px;
-  font-size: ${props => props.theme.fontRegular};
-  text-align: left;
   background-color: white;
+  font-size: ${({ theme }) => theme.fontRegular};
+  text-align: left;
   cursor: pointer;
 
   &::value {
@@ -45,7 +45,7 @@ const OptionBtn = styled.input.attrs(props => ({ type: 'button' }))`
 
   &:focus {
     border: 2px solid black;
-    background-color: ${props => props.theme.mainGrey};
+    background-color: ${({ theme }) => theme.mainGrey};
   }
 `;
-export default PrivacyType;
+export default StayType;

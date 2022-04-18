@@ -16,6 +16,8 @@ const HostingNav = () => {
   );
 };
 
+export default HostingNav;
+
 const HostingNavWrapper = styled.div`
   ${({ theme }) => theme.flexBox('', 'center', 'flex-end')}
   position: fixed;
@@ -26,12 +28,12 @@ const HostingNavWrapper = styled.div`
 
 const NavBtn = styled(Button)`
   margin-left: 10px;
-  outline: none;
+  padding: 5px 10px;
   background-color: black;
   border-radius: 35px;
-  padding: 5px 10px;
-  font-size: 12px;
   color: white;
+  outline: none;
+  font-size: 12px;
 
   &:focus,
   &:hover {
@@ -39,5 +41,3 @@ const NavBtn = styled(Button)`
     color: black;
   }
 `;
-
-export default HostingNav;
