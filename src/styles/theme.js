@@ -8,7 +8,6 @@ export const theme = {
   darkGrey: '#797979',
 
   fontLogo: "'Song Myung', serif",
-
   fontLarge: '48px',
   fontMedium: '28px',
   fontSemiMedium: '20px',
