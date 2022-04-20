@@ -38,10 +38,11 @@ const DateModalBox = styled.div`
   align-items: center;
   position: absolute;
   top: 20px;
-  left: -280px;
+  left: -320px;
   border-radius: 20px;
   z-index: 9;
-  box-shadow: 3px 3px 3px #eeeeee;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 `;
 
 const DateModalWrap = styled.div`

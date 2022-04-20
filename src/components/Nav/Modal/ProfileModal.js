@@ -52,7 +52,7 @@ const BoxWrap = styled.div`
   margin-right: 110px;
   border-radius: 15px 15px 15px 15px;
   background-color: #fff;
-  box-shadow: 3px 3px 3px #eeeeee;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 `;
 
 const BoxText = styled.ul`
@@ -65,10 +65,6 @@ const BoxList = styled.li`
   font-weight: 500;
   cursor: pointer;
   transition: 0.3s;
-  &:hover {
-    color: black;
-    opacity: 0.4;
-  }
 `;
 
 const BoxLine = styled.li`

@@ -4,16 +4,29 @@ import { IoEarthOutline } from 'react-icons/io5';
 import { GrMenu } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import LoginSignup from './LoginSignup';
 import ProfileModal from './ProfileModal';
 import DateModal from './DateModal';
-import PesonalModal from './PesonalModal';
+import LocationModal from './LocationModal';
+import PersonnelModal from './PersonnelModal';
 
 const Nav = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+  const [personnelCount, setPersonnelCount] = useState({
+    adult: 0,
+    children: 0,
+    pet: 0,
+  });
+
+  const sumPersonnel =
+    personnelCount.adult + personnelCount.children + personnelCount.pet;
+
+  const navigate = useNavigate();
 
   const openLoginModal = () => {
     setLoginModal(!loginModal);
@@ -28,6 +41,10 @@ const Nav = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const openLocationModal = () => {
+    setIsLocationModalOpen(!isLocationModalOpen);
+  };
+
   const openGuestModal = () => {
     setIsGuestModalOpen(!isGuestModalOpen);
   };
@@ -37,17 +54,26 @@ const Nav = () => {
       {loginModal && <LoginSignup setLoginModal={setLoginModal} />}
       <NavLayout>
         <NavWrap>
-          <NavLogo>
+          <NavLogo
+            onClick={() => {
+              navigate('/');
+            }}
+          >
             <div>
               <img width="40px" src="/images/Nav/logoW.png" alt="logo" />
             </div>
             <div>DolHaru</div>
           </NavLogo>
           <NavSearchBar>
-            <NavSearchL>
+            <NavSearchL onClick={openLocationModal}>
               <TextWrap>
                 <NavSearchLText>위치</NavSearchLText>
-                <NavSearchInput type="text" placeholder="어디로 가세요?" />
+                <NavSearchInput>어디로 가세요?</NavSearchInput>
+                {isLocationModalOpen && (
+                  <LocationModal
+                    setIsLocationModalOpen={setIsLocationModalOpen}
+                  />
+                )}
               </TextWrap>
             </NavSearchL>
             <NavSearchM onClick={openDateModal}>
@@ -60,8 +86,20 @@ const Nav = () => {
             <NavSearchR>
               <TextWrap onClick={openGuestModal}>
                 <NavSearchRText>인원</NavSearchRText>
-                <NavSearchRTextColor>게스트 추가</NavSearchRTextColor>
-                {isGuestModalOpen && <PesonalModal />}
+                <NavSearchRTextColor>
+                  {sumPersonnel > 0
+                    ? `게스트 ${sumPersonnel}명`
+                    : '게스트 추가'}
+                </NavSearchRTextColor>
+                {isGuestModalOpen && (
+                  <PersonnelModal
+                    setIsGuestModalOpen={setIsGuestModalOpen}
+                    setPersonnelCount={setPersonnelCount}
+                    adultCount={personnelCount.adult}
+                    childrenCount={personnelCount.children}
+                    petCount={personnelCount.pet}
+                  />
+                )}
               </TextWrap>
               <NavSearchBtn>
                 <NavSearchBtnIcon>
@@ -182,7 +220,7 @@ const NavSearchLText = styled.div`
   margin-bottom: 5px;
 `;
 
-const NavSearchInput = styled.input`
+const NavSearchInput = styled.div`
   margin-bottom: 50px;
   border: 0 solid;
   width: 100px;
