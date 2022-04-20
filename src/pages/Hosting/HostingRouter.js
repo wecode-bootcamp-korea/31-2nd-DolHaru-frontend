@@ -6,6 +6,7 @@ import HostingNav from './HostingComponents/HostingNav';
 import StayType from './HostingPages/StayType';
 import SearchForm from './HostingPages/Location/SearchForm';
 import FloorPlan from './HostingPages/FloorPlan/FloorPlan';
+import Amenities from './HostingPages/Amenities/Amenities';
 
 const HostingRouter = () => {
   const navigate = useNavigate();
@@ -71,6 +72,10 @@ const HostingRouter = () => {
           <Route
             path="/floor-plan"
             element={<FloorPlan newStayInfo={newStayInfo} />}
+          />
+          <Route
+            path="/amenities"
+            element={<Amenities newStayInfo={newStayInfo} />}
           />
         </Routes>
         <HostingFooter
