@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HostingFooter from './HostingComponents/HostingFooter';
@@ -7,10 +7,16 @@ import StayType from './HostingPages/StayType';
 import SearchForm from './HostingPages/Location/SearchForm';
 import FloorPlan from './HostingPages/FloorPlan/FloorPlan';
 import Amenities from './HostingPages/Amenities/Amenities';
+import Photos from './HostingPages/Photos';
+import Title from './HostingPages/Title';
+import Highlights from './HostingPages/Highlights/Highlights';
+import Description from './HostingPages/Description';
+import Price from './HostingPages/Price';
 
 const HostingRouter = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [photos, setPhotos] = useState([]);
   const newStayInfo = {};
 
   location.pathname === '/hosting' && localStorage.removeItem('stayInfo');
@@ -46,6 +52,11 @@ const HostingRouter = () => {
       '/hosting': '/hosting/location',
       '/hosting/location': '/hosting/floor-plan',
       '/hosting/floor-plan': '/hosting/amenities',
+      '/hosting/amenities': '/hosting/photos',
+      '/hosting/photos': '/hosting/title',
+      '/hosting/title': '/hosting/highlights',
+      '/hosting/highlights': '/hosting/description',
+      '/hosting/description': '/hosting/price',
     };
     navigate(hostingURL[location.pathname]);
   };
@@ -55,12 +66,121 @@ const HostingRouter = () => {
     navigate(-1);
   };
 
+  const getVideoPageTitle = path => {
+    const title = {
+      '/hosting/photos': '이제 숙소 사진을 올릴 차례입니다.',
+      '/hosting/title': '숙소 이름을 만들어주세요.',
+      '/hosting/highlights': '숙소에 대해 설명해 주세요.',
+      '/hosting/description': '숙소에 대해 더욱 자세히 설명해 주세요',
+      '/hosting/price': '이제 요금을 설정하실 차례입니다',
+    };
+    return title[path];
+  };
+
+  const showVideo = path => {
+    const checkPathArr = [
+      '/hosting/photos',
+      '/hosting/title',
+      '/hosting/highlights',
+      '/hosting/description',
+      '/hosting/price',
+    ];
+    return checkPathArr.includes(path);
+  };
+
+  const getStayInfo = () => {
+    addInfo(newStayInfo);
+    let storageInfo = JSON.parse(localStorage.getItem('stayInfo'));
+    createFormData(storageInfo);
+  };
+
+  const createFormData = storageInfo => {
+    // FIXME :이동 버튼 임시 만들기
+    navigate('/hosting/registered');
+    //TODO : 추후 이 부분 리팩토링 할 것
+    const stayType = storageInfo[0].stayType;
+    const latitude = storageInfo[1].latitude;
+    const longitude = storageInfo[1].longitude;
+    const address = storageInfo[1].address;
+    const totalGuest = storageInfo[2].totalGuest;
+    const bed = storageInfo[2].bed;
+    const bedroom = storageInfo[2].bedroom;
+    const bathroom = storageInfo[2].bathroom;
+    const amenities = storageInfo[3].amenities;
+    const services = storageInfo[3].services;
+    const title = storageInfo[5].title;
+    const highlights = storageInfo[6].highlights;
+    const description = storageInfo[7].description;
+    const price = storageInfo[8].price;
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('price', price);
+    formData.append('bed', bed);
+    formData.append('bedroom', bedroom);
+    formData.append('bathroom', bathroom);
+    formData.append('maxAdult', totalGuest);
+    formData.append('stayTypeID', stayType);
+    formData.append('description', description);
+    formData.append('address', address);
+    formData.append('latitude', latitude);
+    formData.append('longitude', longitude);
+    for (let i = 0; i < services.length; i++) {
+      formData.append('services', services[i]);
+    }
+    for (let i = 0; i < amenities.length; i++) {
+      formData.append('amenities', amenities[i]);
+    }
+    for (let i = 0; i < highlights.length; i++) {
+      formData.append('highlights', highlights[i]);
+    }
+    for (let i = 0; i < photos.length; i++) {
+      formData.append('image', photos[i]);
+    }
+    sendData(formData);
+    localStorage.removeItem('stayInfo');
+  };
+
+  const sendData = formData => {
+    const token = localStorage.getItem('dollharu');
+    fetch('http://10.58.4.154:8000/stays/hosting', {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(res => {
+        res.message === 'SUCCESS'
+          ? navigate('/hosting/registered')
+          : reRegister();
+      });
+  };
+
+  const reRegister = () => {
+    alert('숙소 정보를 잘못 입력하셨습니다. 처음부터 다시 등록하십시오');
+    navigate('/hosting');
+  };
+
   return (
     <MainLayout>
-      <MainLeft>
-        <Logo>🗿 DolHaru</Logo>
-        <MainQuestion>{getPageTitle(location.pathname)}</MainQuestion>
-      </MainLeft>
+      {showVideo(location.pathname) ? (
+        <MainLeftWithVideo>
+          <BackgroundVideoContainer autoPlay muted loop type="video/mp4">
+            <source src="/images/Hosting/Photographer.mp4" />
+          </BackgroundVideoContainer>
+          <Layer />
+          <MainDescription>
+            {getVideoPageTitle(location.pathname)}
+          </MainDescription>
+        </MainLeftWithVideo>
+      ) : (
+        <MainLeft>
+          <Logo>🗿 DolHaru</Logo>
+          <MainQuestion>{getPageTitle(location.pathname)}</MainQuestion>
+        </MainLeft>
+      )}
       <MainRight>
         <HostingNav />
         <Routes>
@@ -77,10 +197,26 @@ const HostingRouter = () => {
             path="/amenities"
             element={<Amenities newStayInfo={newStayInfo} />}
           />
+          <Route
+            path="/photos"
+            element={<Photos newStayInfo={newStayInfo} setPhotos={setPhotos} />}
+          />
+          <Route path="/title" element={<Title newStayInfo={newStayInfo} />} />
+          <Route
+            path="/highlights"
+            element={<Highlights newStayInfo={newStayInfo} />}
+          />
+          <Route
+            path="/description"
+            element={<Description newStayInfo={newStayInfo} />}
+          />
+          <Route path="/price" element={<Price newStayInfo={newStayInfo} />} />
         </Routes>
         <HostingFooter
           goToNextStep={goToNextStep}
           goToPrevStep={goToPrevStep}
+          location={location}
+          getStayInfo={getStayInfo}
         />
       </MainRight>
     </MainLayout>
@@ -105,7 +241,6 @@ const Logo = styled.span`
 
 const MainLeft = styled.div`
   width: 50%;
-  background: rgb(210, 37, 118);
   background: linear-gradient(
     180deg,
     rgba(210, 37, 118, 1) 0%,
@@ -114,8 +249,8 @@ const MainLeft = styled.div`
 `;
 
 const MainRight = styled.div`
-  width: 50%;
   position: relative;
+  width: 50%;
 `;
 
 const MainQuestion = styled.h2`
@@ -128,5 +263,31 @@ const MainQuestion = styled.h2`
   overflow-wrap: break-word;
   line-height: 56px;
   font-size: 45px;
-  font-weight: ${props => props.theme.weightMiddle};
+  font-weight: ${({ theme }) => theme.weightMiddle};
+`;
+
+const MainLeftWithVideo = styled.div`
+  width: 50%;
+`;
+
+const MainDescription = styled(MainQuestion)`
+  top: 50%;
+  width: 45%;
+  padding-left: 40px;
+  z-index: 2;
+`;
+
+const Layer = styled.div`
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+`;
+
+const BackgroundVideoContainer = styled.video`
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
 `;

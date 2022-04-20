@@ -7,6 +7,7 @@ import Staylist from './pages/Staylist/Staylist';
 import Staydetail from '../src/pages/Staydetail/Staydetail';
 import KakaoLogin from './components/KakaoLogin/KakaoLogin';
 import Nav from '../src/components/Modal/Nav';
+import Registered from './pages/Hosting/HostingPages/Registered';
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
         <Route path="/" element={<Main />} />
         <Route path="/user/*" element={<User />} />
         <Route path="/hosting/*" element={<HostingRouter />} />
+        <Route path="/hosting/registered" element={<Registered />} />
         <Route path="/staylist" element={<Staylist />} />
         <Route path="/staydetail" element={<Staydetail />} />
         <Route path="/login" element={<KakaoLogin />} />

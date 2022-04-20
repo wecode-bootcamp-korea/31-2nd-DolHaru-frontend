@@ -3,15 +3,15 @@ import styled from 'styled-components';
 
 export const StayType = ({ newStayInfo }) => {
   const updateStayType = e => {
-    const { value } = e.target;
-    newStayInfo.stayType = value;
+    const { name } = e.target;
+    newStayInfo.stayType = name;
   };
 
   return (
     <InputBox onClick={updateStayType}>
-      <OptionBtn name="공간 전체" value="공간 전체" />
-      <OptionBtn name="개인실" value="개인실" />
-      <OptionBtn name="다인실" value="다인실" />
+      <OptionBtn name="1" value="공간 전체" />
+      <OptionBtn name="2" value="개인실" />
+      <OptionBtn name="3" value="다인실" />
     </InputBox>
   );
 };
