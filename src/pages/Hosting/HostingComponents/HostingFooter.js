@@ -1,12 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const HostingFooter = ({ goToNextStep, goToPrevStep }) => {
+export const HostingFooter = ({
+  goToNextStep,
+  goToPrevStep,
+  location,
+  getStayInfo,
+}) => {
   return (
     <RightFooter>
       <Indicator />
       <GoBackBtn onClick={goToPrevStep}>뒤로</GoBackBtn>
-      <GoNextBtn onClick={goToNextStep}>다음</GoNextBtn>
+      {location.pathname === '/hosting/price' ? (
+        <CompleteBtn onClick={getStayInfo}>숙소 등록 완료하기</CompleteBtn>
+      ) : (
+        <GoNextBtn onClick={goToNextStep}>다음</GoNextBtn>
+      )}
     </RightFooter>
   );
 };
@@ -19,7 +28,7 @@ const RightFooter = styled.div`
   bottom: 0;
   right: 0;
   width: 50%;
-  padding: 20px 60px;
+  padding: 20px 50px;
   border-top: 2px solid lightgray;
   background-color: white;
   z-index: 4;
@@ -46,4 +55,8 @@ const GoNextBtn = styled.div`
   background-color: black;
   color: white;
   cursor: pointer;
+`;
+
+const CompleteBtn = styled(GoNextBtn)`
+  background-color: #f22b55;
 `;
