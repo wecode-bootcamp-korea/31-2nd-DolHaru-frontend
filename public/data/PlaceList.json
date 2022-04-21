@@ -38,9 +38,9 @@
     "bedRoom": 1,
     "bathRoom": 3,
     "stayService": ["주차장", "주방", "무선 인터넷"],
-    "price": 89,
-    "latitude": 30.450701,
-    "longitude": 125.570667
+    "price": 90,
+    "latitude": 33.450705,
+    "longitude": 126.570677
   },
   {
     "stayId": 3,
@@ -60,9 +60,9 @@
     "bedRoom": 1,
     "bathRoom": 3,
     "stayService": ["주차장", "주방", "무선 인터넷"],
-    "price": 89,
-    "latitude": 30.450701,
-    "longitude": 125.570667
+    "price": 129,
+    "latitude": 33.450936,
+    "longitude": 126.569477
   },
   {
     "stayId": 4,
@@ -82,9 +82,9 @@
     "bedRoom": 1,
     "bathRoom": 3,
     "stayService": ["주차장", "주방", "무선 인터넷"],
-    "price": 89,
-    "latitude": 30.450701,
-    "longitude": 125.570667
+    "price": 130,
+    "latitude": 33.450879,
+    "longitude": 126.56994
   },
   {
     "stayId": 5,
@@ -105,8 +105,8 @@
     "bathRoom": 3,
     "stayService": ["주차장", "주방", "무선 인터넷"],
     "price": 89,
-    "latitude": 30.450701,
-    "longitude": 125.570667
+    "latitude": 33.451393,
+    "longitude": 126.570738
   },
   {
     "stayId": 6,
@@ -150,7 +150,7 @@
     "stayService": ["주차장", "주방", "무선 인터넷"],
     "price": 89,
     "latitude": 30.450701,
-    "longitude": 125.570667
+    "longitude": 123.570667
   },
   {
     "stayId": 8,
@@ -194,7 +194,7 @@
     "stayService": ["주차장", "주방", "무선 인터넷"],
     "price": 89,
     "latitude": 30.450701,
-    "longitude": 125.570667
+    "longitude": 121.570667
   },
   {
     "stayId": 10,
@@ -216,7 +216,7 @@
     "stayService": ["주차장", "주방", "무선 인터넷"],
     "price": 89,
     "latitude": 30.450701,
-    "longitude": 125.570667
+    "longitude": 124.570667
   },
   {
     "stayId": 11,
@@ -237,8 +237,8 @@
     "bathRoom": 3,
     "stayService": ["주차장", "주방", "무선 인터넷"],
     "price": 89,
-    "latitude": 30.450701,
-    "longitude": 125.570667
+    "latitude": 35.550701,
+    "longitude": 126.530667
   },
   {
     "stayId": 12,
@@ -258,8 +258,8 @@
     "bedRoom": 1,
     "bathRoom": 3,
     "stayService": ["주차장", "주방", "무선 인터넷"],
-    "price": 89,
-    "latitude": 30.450701,
-    "longitude": 125.570667
+    "price": 9998,
+    "latitude": 10.450701,
+    "longitude": 122.570667
   }
 ]
