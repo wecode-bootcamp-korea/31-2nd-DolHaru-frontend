@@ -4,12 +4,14 @@ import HostingRouter from './pages/Hosting/HostingRouter';
 import User from './pages/User';
 import Main from './pages/Main';
 import Staylist from './pages/Staylist/Staylist';
-import Staydetail from './pages/Staydetail';
+import Staydetail from '../src/pages/Staydetail/Staydetail';
 import KakaoLogin from './components/KakaoLogin/KakaoLogin';
+import Nav from '../src/components/Modal/Nav';
 
 function Router() {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/user/*" element={<User />} />
