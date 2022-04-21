@@ -1,17 +1,29 @@
 import React, { useEffect } from 'react';
-import { BASE_URL } from '../../../../config/config';
+import { BASE_URL } from '../../../../config';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const KakaoLogin = () => {
-  const code = new URL(window.location.href).searchParams.get('code');
+  const location = useLocation();
+  const code = location.search;
+  const navigate = useNavigate();
+  const accessCode = new URLSearchParams(code).get('code');
 
   useEffect(() => {
-    fetch(`${BASE_URL}users/signup?code=${code}`, {
+    fetch(`${BASE_URL}/users/signin?code=${accessCode}`, {
       method: 'POST',
     })
       .then(res => res.json())
-      // .then(data => localStorage.setItem('doll', data.access_token));
-      .then(data => console.log(data));
-  }, []);
+      .then(data => {
+        console.log(data);
+        if (data.token) {
+          localStorage.setItem('dollharu', data.token);
+          navigate('/');
+        } else {
+          alert('로그인이 실패하였습니다.');
+          navigate('/');
+        }
+      });
+  }, [code, navigate]);
 
   return <div>KakaoLogin</div>;
 };

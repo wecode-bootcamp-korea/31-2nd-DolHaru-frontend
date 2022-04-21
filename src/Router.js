@@ -5,12 +5,10 @@ import User from './pages/User';
 import Main from './pages/Main';
 import Staylist from './pages/Staylist';
 import Staydetail from './pages/Staydetail';
-import Nav from '../src/components/Nav/Modal/Nav';
 
 function Router() {
   return (
     <BrowserRouter>
-      <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/user/*" element={<User />} />

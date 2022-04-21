@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 import { KAKAO } from './KakaoLogin/KakaoAuth';
-import { CLIENT_ID } from './KakaoLogin/KakaoAuth';
 
 const LoginSignup = ({ setLoginModal }) => {
-  console.log(CLIENT_ID);
-
   return (
     <>
       <Main

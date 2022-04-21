@@ -6,16 +6,17 @@ import Main from './Main';
 import Staydetail from './Staydetail';
 import Staylist from './Staylist';
 import Footer from './../components/Footer';
+import KakaoLogin from '../components/Nav/Modal/KakaoLogin/KakaoLogin';
 
 const User = () => {
   return (
     <>
       <Nav />
-      <LoginSignup />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/staylist" element={<Staylist />} />
         <Route path="/staydetail" element={<Staydetail />} />
+        <Route path="/kakao/token" element={<KakaoLogin />} />
       </Routes>
       <Footer />
     </>
