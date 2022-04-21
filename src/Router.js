@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HostingRouter from './pages/Hosting/HostingRouter';
 import User from './pages/User';
 import Main from './pages/Main';
-import Staylist from './pages/Staylist';
+import Staylist from './pages/Staylist/Staylist';
 import Staydetail from './pages/Staydetail';
 
 function Router() {

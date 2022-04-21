@@ -8,6 +8,7 @@ export const theme = {
   darkGrey: '#797979',
 
   fontLogo: "'Song Myung', serif",
+
   fontLarge: '48px',
   fontMedium: '28px',
   fontSemiMedium: '20px',
@@ -28,9 +29,9 @@ export const theme = {
   `,
 
   flexBox: (direction = 'row', align = 'center', justify = 'center') => `
-    display: flex;
-    flex-direction: ${direction};
-    align-items: ${align};
-    justify-content: ${justify};
+  display: flex;
+  flex-direction: ${direction};
+  align-items: ${align};
+  justify-content: ${justify};
   `,
 };
