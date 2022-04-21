@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Nav from '../components/Nav/Nav';
+import Nav from '../components/Modal/Nav';
 import Main from './Main';
-import Staydetail from './Staydetail';
+import Staydetail from '../pages/Staydetail/Staydetail';
 import Staylist from './Staylist/Staylist';
 import Footer from './../components/Footer';
 

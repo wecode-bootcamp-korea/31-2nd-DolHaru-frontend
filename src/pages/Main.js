@@ -110,12 +110,13 @@ const MainLayout = styled.div`
   display: flex;
   justify-content: center;
   height: 960px;
-  margin: 0;
   background-color: black;
   background: linear-gradient(black 100%, #ffffff 50%);
 `;
 
-const MainBox = styled.div``;
+const MainBox = styled.div`
+  margin-top: 100px;
+`;
 
 const MainWrap = styled.div`
   position: relative;

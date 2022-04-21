@@ -281,7 +281,6 @@ const StayInfo = styled.div`
 const Map = styled.div`
   width: 47%;
   height: 100%;
-  position: fixed;
   right: 0;
   top: 0;
 `;
