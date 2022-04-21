@@ -1,0 +1,25 @@
+[
+  {
+    "stayId": 1,
+    "title": "세상에서 제일 좋은집",
+    "address": "제주도",
+    "placeImages": ["img1", "img2", "img3", "img4", "img5"],
+    "hostName": "이병헌",
+    "stayType": "공간전체",
+    "maxAdult": 1,
+    "maxKid": 1,
+    "maxPet": 1,
+    "bedroom": 1,
+    "bed": 1,
+    "bathroom": 2,
+
+    "description": "주인공 김인하(이병헌)은 어린 시절부터 삼촌과 함께 전국의 도박장을 돌아다니면서 도박을 배웁니다.",
+    "services": ["수영장", "욕조", "바베큐"],
+    "amenities": ["무선 인터넷", "주방", "주차장"],
+    "highlights": ["친근함", "스타일 좋은", "공간이 넓은"],
+
+    "price": 50000,
+    "latitude": 33.450701,
+    "longitude": 126.570667
+  }
+]
