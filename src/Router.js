@@ -5,6 +5,7 @@ import User from './pages/User';
 import Main from './pages/Main';
 import Staylist from './pages/Staylist/Staylist';
 import Staydetail from './pages/Staydetail';
+import KakaoLogin from './components/KakaoLogin/KakaoLogin';
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
         <Route path="/hosting/*" element={<HostingRouter />} />
         <Route path="/staylist" element={<Staylist />} />
         <Route path="/staydetail" element={<Staydetail />} />
+        <Route path="/login" element={<KakaoLogin />} />
       </Routes>
     </BrowserRouter>
   );
