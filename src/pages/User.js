@@ -13,7 +13,7 @@ const User = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/staylist" element={<Staylist />} />
-        <Route path="/staydetail" element={<Staydetail />} />
+        <Route path="/staydetail/:id" element={<Staydetail />} />
       </Routes>
       <Footer />
     </>
