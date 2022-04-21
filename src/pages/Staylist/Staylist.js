@@ -6,56 +6,55 @@ import StayMap from './StaylistMap/StayMap';
 import Buttons from './StaylistPagination/Buttons';
 import styled from 'styled-components';
 import StayModal from './StaylistFilter/StayModal';
+import API from './../../config';
 
 const LIMIT = 12;
+const qsArr = [];
 
 const Staylist = () => {
+  const location = useLocation();
   const [isClicked, setIsClicked] = useState(false);
   const [placeList, setPlaceList] = useState([]);
   const [clickedList, setClickedList] = useState([]);
   const [buttonNum, setButtonNum] = useState(1);
-  const [myUrl, setMyUrl] = useState('http://dolharu.com');
-
+  const [offsetNumber, setOffsetNumber] = useState(0);
   const navigate = useNavigate();
-  const location = useLocation();
   const buttonRef = useRef();
 
   useEffect(() => {
     fetch(
-      `/data/PlaceList.json${location.search || `?limit=${LIMIT}}&offset=0`}`
+      `${API.stays}${
+        location.search ? location.search + '&' : '?'
+      }limit=${LIMIT}&offset=${offsetNumber}`
     )
       .then(res => res.json())
-      .then(data => setPlaceList(data));
-  }, [location.search]);
+      .then(data => setPlaceList(data.stay_list));
+  }, [location.search, offsetNumber]);
 
   const updateUrl = (category, value) => {
-    const newUrl = `${category}=${value}`;
-    myUrl.split('')[myUrl.length - 1] === '?'
-      ? setMyUrl(myUrl + newUrl)
-      : setMyUrl(myUrl + '&' + newUrl);
+    const queryString = `${category}=${value}`;
+    qsArr.push(queryString);
+    const newQueryString = qsArr.join('&');
+    navigate(
+      `/user/staylist?${newQueryString}&limit=${LIMIT}&offset=${offsetNumber}`
+    );
   };
 
   const filterUrl = (category, value) => {
     const deletedUrl = `${category}=${value}`;
-    const filteredUrl = myUrl
-      .split('&')
-      .filter(item => item !== deletedUrl)
-      .map((item, idx) => {
-        return idx === 0 ? item : '&' + item;
-      })
-      .join('');
-    setMyUrl(filteredUrl);
+    const index = qsArr.indexOf(deletedUrl);
+    qsArr.splice(index, 1);
+    const newQueryString = qsArr.join('&');
+    navigate(`/user/staylist?${newQueryString}`);
   };
 
   const updateOffset = ({ buttonIndex, number }) => {
-    const offset = buttonIndex * LIMIT;
-    const queryString = `?limit=${LIMIT}&offset=${offset}`;
+    setOffsetNumber(buttonIndex * 12);
     setButtonNum(number);
-    navigate(queryString);
   };
 
   const openModal = () => {
-    setIsClicked(!isClicked); // 저장되어 있는 값의 반대값
+    setIsClicked(!isClicked);
   };
 
   return (
@@ -63,7 +62,6 @@ const Staylist = () => {
       <StaylistMenu>
         <StaylistFilter>
           <div>
-            {/* <PriceModal pricetype={PRICE_TYPE} /> */}
             <TypeBtn>요금</TypeBtn>
             <TypeBtn ref={buttonRef} onClick={openModal}>
               숙소 유형
@@ -76,6 +74,8 @@ const Staylist = () => {
                 staytype={STAY_TYPE}
                 clickedList={clickedList}
                 setClickedList={setClickedList}
+                updateUrl={updateUrl}
+                filterUrl={filterUrl}
               />
             )}
           </div>
@@ -88,9 +88,11 @@ const Staylist = () => {
               clickedList={clickedList}
               setClickedList={setClickedList}
               changeUrl={() => {
-                clickedList.includes(name)
-                  ? filterUrl(category, value)
-                  : updateUrl(category, value);
+                if (clickedList.includes(name)) {
+                  filterUrl(category, value);
+                } else {
+                  updateUrl(category, value);
+                }
               }}
             />
           ))}
@@ -149,13 +151,6 @@ const Staylist = () => {
 
 export default Staylist;
 
-// const PRICE_TYPE = {
-//   stayTypeId: 1,
-//   name: '요금',
-//   category: 'cost',
-//   contents: ['max', 'min'],
-// };
-
 const STAY_TYPE = {
   stayTypeId: 1,
   name: '숙소 유형',
@@ -179,44 +174,43 @@ const STAY_TYPE = {
         '사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께 이용합니다',
     },
   ],
-  value: [1, 2, 3],
 };
 
 const FILTER_LIST = [
   {
     filterId: 1,
     name: '수영장',
-    category: 'amenities',
+    category: 'amenity',
     value: 1,
   },
   {
     filterId: 2,
     name: '자쿠지',
-    category: 'amenities',
+    category: 'amenity',
     value: 2,
   },
   {
     filterId: 3,
     name: '바베큐',
-    category: 'amenities',
+    category: 'amenity',
     value: 3,
   },
   {
     filterId: 4,
     name: '무선 인터넷',
-    category: 'services',
+    category: 'service',
     value: 1,
   },
   {
     filterId: 5,
     name: '주방',
-    category: 'services',
+    category: 'service',
     value: 2,
   },
   {
     filterId: 6,
     name: '주차장',
-    category: 'services',
+    category: 'service',
     value: 3,
   },
 ];
@@ -237,6 +231,7 @@ const StaylistMenu = styled.div`
   background-color: ${({ theme }) => theme.mainWhite};
   border-bottom: 1px solid #dbdbdb;
   position: relative;
+  margin-top: 80px;
 `;
 
 const StaylistFilter = styled.div`
@@ -256,7 +251,7 @@ const StayPlace = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 53%;
+  width: 58%;
   height: 100vh;
   background-color: ${({ theme }) => theme.mainWhite};
   overflow-y: scroll;
@@ -279,7 +274,7 @@ const StayInfo = styled.div`
 `;
 
 const Map = styled.div`
-  width: 47%;
+  width: 42%;
   height: 100%;
   right: 0;
   top: 0;

@@ -1,6 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { StyledEngineProvider } from '@mui/styled-engine';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StaylistSlider from '../StaylistImgSlider/StaylistSlider';
 
@@ -20,41 +20,46 @@ const Placelist = ({
     price,
   },
 }) => {
+  const navigate = useNavigate();
   return (
-    <StyledEngineProvider injectFirst>
-      <PlacelistContainer>
-        <PlaceImg>
-          <StaylistSlider images={placeImages} />
-        </PlaceImg>
-        <PlaceTextlist>
-          <PlaceDesc>
-            <div>
-              <Desc>{description}</Desc>
-              <Desc>{placeName}</Desc>
-              <div />
-            </div>
-            <button>
-              <FavoriteBorderIcon />
-            </button>
-          </PlaceDesc>
-          <Options>
-            <span>최대 인원 {adult + kid + pet}명</span>
-            <span> · </span>
-            <span>침실 {bedRoom}개</span>
-            <span> · </span>
-            <span>침대 {bed}개</span>
-            <span> · </span>
-            <span>욕실 {bathRoom}개</span>
-          </Options>
-          <Options>
-            <span>{stayService.join('·')}</span>
-          </Options>
-          <Price>
-            <div>$ {price} / 박</div>
-          </Price>
-        </PlaceTextlist>
-      </PlacelistContainer>
-    </StyledEngineProvider>
+    <PlacelistContainer>
+      <PlaceImg>
+        <StaylistSlider images={placeImages} />
+      </PlaceImg>
+      <PlaceTextlist>
+        <PlaceDesc>
+          <div>
+            <Desc>{description}</Desc>
+            <Desc
+              onClick={() => {
+                navigate(`/user/staydetail/${stayId}`);
+              }}
+            >
+              {placeName}
+            </Desc>
+            <div />
+          </div>
+          <button>
+            <FavoriteBorderIcon />
+          </button>
+        </PlaceDesc>
+        <Options>
+          <span>최대 인원 {adult + kid + pet}명</span>
+          <span> · </span>
+          <span>침실 {bedRoom}개</span>
+          <span> · </span>
+          <span>침대 {bed}개</span>
+          <span> · </span>
+          <span>욕실 {bathRoom}개</span>
+        </Options>
+        <Options>
+          <span>{stayService.join('·')}</span>
+        </Options>
+        <Price>
+          <div>$ {Number(price).toLocaleString()} / 박</div>
+        </Price>
+      </PlaceTextlist>
+    </PlacelistContainer>
   );
 };
 
@@ -123,6 +128,7 @@ const Desc = styled.div`
   height: 20px;
   padding-left: 10px;
   background-color: ${({ theme }) => theme.mainWhite};
+  cursor: pointer;
 
   &:last-child {
     height: 25px;

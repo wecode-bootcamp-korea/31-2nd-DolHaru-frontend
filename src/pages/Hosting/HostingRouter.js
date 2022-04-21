@@ -12,6 +12,7 @@ import Title from './HostingPages/Title';
 import Highlights from './HostingPages/Highlights/Highlights';
 import Description from './HostingPages/Description';
 import Price from './HostingPages/Price';
+import API from './../../config';
 
 const HostingRouter = () => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const HostingRouter = () => {
 
   const goToPrevStep = () => {
     removeInfo();
-    navigate(-1);
+    location.path === '/hosting/location' ? navigate('/hosting') : navigate(-1);
   };
 
   const getVideoPageTitle = path => {
@@ -95,8 +96,6 @@ const HostingRouter = () => {
   };
 
   const createFormData = storageInfo => {
-    // FIXME :이동 버튼 임시 만들기
-    navigate('/hosting/registered');
     //TODO : 추후 이 부분 리팩토링 할 것
     const stayType = storageInfo[0].stayType;
     const latitude = storageInfo[1].latitude;
@@ -143,10 +142,12 @@ const HostingRouter = () => {
 
   const sendData = formData => {
     const token = localStorage.getItem('dollharu');
-    fetch('http://10.58.4.154:8000/stays/hosting', {
+    fetch(API.hosting, {
       method: 'POST',
       headers: {
         Authorization: token,
+        //   Authorization:
+        //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.432mT0P65oRtOKje6TC-KmyBY62nLEXG_wVx57BA-MM',
       },
       body: formData,
     })
@@ -177,7 +178,14 @@ const HostingRouter = () => {
         </MainLeftWithVideo>
       ) : (
         <MainLeft>
-          <Logo>🗿 DolHaru</Logo>
+          <Logo
+            onClick={() => {
+              navigate('/user');
+            }}
+          >
+            <LogoImg alt="logo" src="/images/Nav/logoW.png" />
+            DolHaru
+          </Logo>
           <MainQuestion>{getPageTitle(location.pathname)}</MainQuestion>
         </MainLeft>
       )}
@@ -231,12 +239,18 @@ const MainLayout = styled.main`
   overflow: hidden;
 `;
 
-const Logo = styled.span`
-  display: inline-block;
-  margin: 60px 0 0 50px;
+const Logo = styled.div`
+  ${({ theme }) => theme.flexBox('')}
+  width: 50px;
+  margin: 45px 0 0 80px;
   color: white;
   font-family: ${({ theme }) => theme.fontLogo};
   font-size: ${({ theme }) => theme.fontMedium};
+  cursor: pointer;
+`;
+
+const LogoImg = styled.img`
+  width: 100%;
 `;
 
 const MainLeft = styled.div`

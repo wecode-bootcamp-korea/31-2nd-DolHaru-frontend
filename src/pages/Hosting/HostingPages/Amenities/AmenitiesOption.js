@@ -33,6 +33,10 @@ const Option = styled.div`
   padding: 40px 6px;
   border: 2px solid ${({ border }) => border};
   border-radius: 7px;
+
+  &:hover {
+    border: 2px solid black;
+  }
 `;
 
 const OptionIconContainer = styled.div`

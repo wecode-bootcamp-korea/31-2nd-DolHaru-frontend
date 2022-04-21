@@ -6,7 +6,7 @@ const StayMap = ({ fetchData }) => {
     let mapContainer = document.getElementById('map'), // 지도를 표시할 div
       mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 1, // 지도의 확대 레벨
+        level: 10, // 지도의 확대 레벨
       };
 
     let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -18,7 +18,7 @@ const StayMap = ({ fetchData }) => {
         data.longitude
       );
 
-      const contentInner = `<div style="padding: 18px;
+      const contentInner = `<div style="padding: 10px 15px;
       position: relative; bottom:20px; border-radius: 28px; background-color: rgb(255, 255, 255);
       box-shadow: rgb(0 0 0 / 4%) 0px 0px 0px 1px, rgb(0 0 0 / 18%) 0px 2px 4px;
       color: rgb(34, 34, 34); text-align:center;
@@ -32,7 +32,7 @@ const StayMap = ({ fetchData }) => {
         whiteOverlay.setMap(null);
       });
 
-      const blackContentInner = `<div style="padding: 18px;
+      const blackContentInner = `<div style="padding: 10px 15px;
       position: relative; bottom:20px; border-radius: 28px; background-color: black;
       box-shadow: rgb(0 0 0 / 4%) 0px 0px 0px 1px, rgb(0 0 0 / 18%) 0px 2px 4px;
       color: rgb(255, 255, 255); text-align:center;

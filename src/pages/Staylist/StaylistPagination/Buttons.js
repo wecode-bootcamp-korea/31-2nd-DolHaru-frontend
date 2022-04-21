@@ -25,6 +25,13 @@ const Buttons = ({ updateOffset, buttonNum }) => {
       >
         3
       </PageBtn>
+      <PageBtn
+        onClick={() => updateOffset({ buttonIndex: 3, number: 4 })}
+        background={buttonNum === 4 ? 'black' : 'white'}
+        color={buttonNum === 4 ? 'white' : ''}
+      >
+        4
+      </PageBtn>
     </>
   );
 };

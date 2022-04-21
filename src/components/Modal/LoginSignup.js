@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
-import { KAKAO } from './KakaoLogin/KakaoAuth';
+import { KAKAO } from '../KakaoLogin/KakaoAuth';
 
 const LoginSignup = ({ setLoginModal }) => {
   return (
