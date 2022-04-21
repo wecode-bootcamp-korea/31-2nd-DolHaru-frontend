@@ -14,6 +14,7 @@ import {
   FaDoorClosed,
   FaLocationArrow,
 } from 'react-icons/fa';
+import API from './../../config';
 
 const Staydetail = () => {
   const [roomdetail, setRoomdetail] = useState({});
@@ -39,7 +40,7 @@ const Staydetail = () => {
   const { id } = params;
 
   useEffect(() => {
-    fetch(`http://10.58.4.154:8000/stays/${id}`)
+    fetch(`${API.stays}/${id}`)
       .then(res => res.json())
       .then(data => setRoomdetail(data.result));
   }, [id]);
@@ -84,10 +85,12 @@ const Staydetail = () => {
                   침대 {bed}개 · 욕실 {bathRoom}개
                 </p>
               </div>
-              <StayHost
-                alt="hostProfile"
-                src="/images/Staydetail/userprofile.jpg"
-              />
+              <StayhostContainer>
+                <StayHost
+                  alt="hostProfile"
+                  src="/images/Staydetail/userprofile.jpg"
+                />
+              </StayhostContainer>
             </SpaceCenter>
           </Section>
           <Section>
@@ -144,6 +147,7 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 100px;
+  padding-bottom: 100px;
 `;
 
 const Main = styled.div`
@@ -202,11 +206,17 @@ const HostName = styled.div`
   padding-bottom: 10px;
 `;
 
-const StayHost = styled.img`
+const StayhostContainer = styled.div`
   width: 70px;
-  height: 50%;
-  border-radius: 60%;
+  height: 70px;
+  border-radius: 50%;
   overflow: hidden;
+`;
+
+const StayHost = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const SmallSection = styled.div`

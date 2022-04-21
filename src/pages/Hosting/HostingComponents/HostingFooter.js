@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export const HostingFooter = ({
@@ -7,12 +7,36 @@ export const HostingFooter = ({
   location,
   getStayInfo,
 }) => {
+  const [isClicked, setIsClicked] = useState(false);
+  const handleClick = () => {
+    getStayInfo();
+    setIsClicked(!isClicked);
+  };
+
+  const getpercentage = path => {
+    const completion = {
+      '/hosting': '10%',
+      '/hosting/location': '20%',
+      '/hosting/floor-plan': '30%',
+      '/hosting/amenities': '40%',
+      '/hosting/photos': '50%',
+      '/hosting/title': '60%',
+      '/hosting/highlights': '70%',
+      '/hosting/description': '80%',
+      '/hosting/price': '90%',
+    };
+    return completion[path];
+  };
   return (
     <RightFooter>
-      <Indicator />
+      <Indicator percentage={getpercentage(location.pathname)} />
       <GoBackBtn onClick={goToPrevStep}>뒤로</GoBackBtn>
       {location.pathname === '/hosting/price' ? (
-        <CompleteBtn onClick={getStayInfo}>숙소 등록 완료하기</CompleteBtn>
+        isClicked ? (
+          <Loading onClick={handleClick}>업로드 중...</Loading>
+        ) : (
+          <CompleteBtn onClick={handleClick}>숙소 등록 완료하기</CompleteBtn>
+        )
       ) : (
         <GoNextBtn onClick={goToNextStep}>다음</GoNextBtn>
       )}
@@ -36,10 +60,10 @@ const RightFooter = styled.div`
 
 const Indicator = styled.div`
   position: absolute;
-  top: -2px;
+  top: -2.5px;
   left: 0;
-  width: 20%;
-  border: 1px solid black;
+  width: ${({ percentage }) => percentage};
+  border: 1.5px solid black;
 `;
 
 const GoBackBtn = styled.div`
@@ -60,3 +84,5 @@ const GoNextBtn = styled.div`
 const CompleteBtn = styled(GoNextBtn)`
   background-color: #f22b55;
 `;
+
+const Loading = styled(GoNextBtn)``;

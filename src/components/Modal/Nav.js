@@ -5,7 +5,6 @@ import { GrMenu } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import qs from 'qs';
 import LoginSignup from './LoginSignup';
 import ProfileModal from './ProfileModal';
 import DateModal from './DateModal';
@@ -57,22 +56,13 @@ const Nav = () => {
   };
 
   const goToMain = () => {
-    navigate('/');
+    navigate('/user');
   };
 
   const goToStaylist = () => {
     setIsGuestModalOpen(false);
-    navigate(`/staylist?${queryString}`);
+    navigate('/user/staylist/');
   };
-
-  const queryString = qs.stringify(
-    {
-      maxAdult: `${personnelCount.adult}`,
-      maxKid: `${personnelCount.children}`,
-      maxPet: `${personnelCount.pet}`,
-    },
-    { indices: false }
-  );
 
   return (
     <>
@@ -130,7 +120,13 @@ const Nav = () => {
             </NavSearchR>
           </NavSearchBar>
           <NavRight>
-            <Navhost>호스트 되기</Navhost>
+            <Navhost
+              onClick={() => {
+                navigate('/hosting');
+              }}
+            >
+              호스트 되기
+            </Navhost>
             <NavIcon>
               <IoEarthOutline />
             </NavIcon>
@@ -154,14 +150,14 @@ const Nav = () => {
 export default Nav;
 
 const NavLayout = styled.div`
-  width: 100%;
+  width: 100vw;
   background-color: #fff;
   z-index: 999;
   position: fixed;
 `;
 
 const NavWrap = styled.div`
-  max-width: 1300px;
+  width: 90vw;
   display: flex;
   justify-content: space-between;
   align-items: center;

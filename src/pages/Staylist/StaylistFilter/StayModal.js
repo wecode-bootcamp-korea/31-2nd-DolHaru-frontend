@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-const StayModal = ({ staytype, isClicked, setIsClicked, buttonRef }) => {
+const StayModal = ({
+  staytype,
+  isClicked,
+  setIsClicked,
+  buttonRef,
+  updateUrl,
+  filterUrl,
+}) => {
   const { contents } = staytype;
   const modalRef = useRef();
   const modalCloseHandler = ({ target }) => {
@@ -25,13 +32,13 @@ const StayModal = ({ staytype, isClicked, setIsClicked, buttonRef }) => {
       {contents.map(({ title, description }, index) => (
         <Modal key={index}>
           <ModalInfo>
-            <input type="checkbox" />
-            {title}
-            <div>{description}</div>
+            <InputCheckbox type="checkbox" id="field" />
+            <Label for="field">{title}</Label>
+            <Description>{description}</Description>
           </ModalInfo>
         </Modal>
       ))}
-      <SaveBtn>저장</SaveBtn>
+      <SaveBtn onClick={() => setIsClicked()}>저장</SaveBtn>
     </ModalWrapper>
   );
 };
@@ -43,7 +50,6 @@ const ModalWrapper = styled.div`
   top: 70px;
   left: 110px;
   width: 330px;
-  height: 280px;
   padding: 20px;
   background-color: white;
   border: 0.5px solid #dbdbdb;
@@ -62,19 +68,35 @@ const Modal = styled.div`
   div {
     margin-left: 17px;
     padding-top: 3px;
-    font-size: 13px;
   }
 `;
 
 const ModalInfo = styled.div`
-  width: 260px;
+  position: relative;
 `;
 
 const SaveBtn = styled.button`
-  position: absolute;
-  right: 20px;
-  width: 50px;
   height: 30px;
   color: white;
   background-color: black;
+  margin-left: 240px;
+  padding: 5px 10px;
+  border-radius: 4px;
+`;
+
+const InputCheckbox = styled.input`
+  width: 20px;
+  height: 20px;
+`;
+
+const Label = styled.label`
+  font-size: 19px;
+  margin-left: 3px;
+`;
+
+const Description = styled.div`
+  margin: 5px 0;
+  padding-left: 10px;
+  font-size: 15px;
+  color: ${({ theme }) => theme.darkGrey};
 `;

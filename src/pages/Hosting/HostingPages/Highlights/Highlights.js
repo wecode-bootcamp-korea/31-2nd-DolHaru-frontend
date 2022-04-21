@@ -60,14 +60,14 @@ const Highlights_OPTIONS = [
     text: '독특함',
     icon: <CameraEnhanceOutlinedIcon />,
   },
-  { id: 4, text: '세련됨', icon: <ThumbUpAltOutlinedIcon /> },
+  { id: 3, text: '세련됨', icon: <ThumbUpAltOutlinedIcon /> },
   {
-    id: 5,
+    id: 4,
     text: '중심부에 위치',
     icon: <RoomOutlinedIcon />,
   },
   {
-    id: 6,
+    id: 5,
     text: '넓은 공간',
     icon: <FamilyRestroomOutlinedIcon />,
     category: 'amenities',

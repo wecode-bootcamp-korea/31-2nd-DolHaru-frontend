@@ -4,7 +4,6 @@ import Nav from '../components/Modal/Nav';
 import Main from './Main';
 import Staydetail from '../pages/Staydetail/Staydetail';
 import Staylist from './Staylist/Staylist';
-import Footer from './../components/Footer';
 
 const User = () => {
   return (
@@ -15,7 +14,6 @@ const User = () => {
         <Route path="/staylist" element={<Staylist />} />
         <Route path="/staydetail/:id" element={<Staydetail />} />
       </Routes>
-      <Footer />
     </>
   );
 };

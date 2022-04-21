@@ -24,6 +24,6 @@ const Map = ({ latitude, longitude }) => {
     marker.setMap(map);
   }, [latitude, longitude]);
 
-  return <div id="map" style={{ width: '60vw', height: '50vh' }} />;
+  return <div id="map" style={{ width: '60vw', height: '60vh' }} />;
 };
 export default Map;
