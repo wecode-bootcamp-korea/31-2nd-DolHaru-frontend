@@ -12,7 +12,7 @@ function Router() {
         <Route path="/*" element={<User />} />
         <Route path="/hosting/*" element={<HostingRouter />} />
         <Route path="/hosting/registered" element={<Registered />} />
-        <Route path="/user/kakao/token" element={<KakaoLogin />} />
+        <Route path="/kakao/token" element={<KakaoLogin />} />
       </Routes>
     </BrowserRouter>
   );

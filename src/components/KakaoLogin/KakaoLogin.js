@@ -21,7 +21,7 @@ const KakaoLogin = () => {
           navigate('/');
           alert('로그인에 성공했습니다.');
         } else {
-          alert('로그인이 실패하였습니다.');
+          alert('로그인에 실패하였습니다.');
           navigate('/');
         }
       });
