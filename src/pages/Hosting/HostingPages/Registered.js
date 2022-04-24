@@ -19,7 +19,7 @@ const Registered = () => {
           <SubDescription>-돌하룻밤 드림</SubDescription>
           <Button
             onClick={() => {
-              navigate('/user/staylist');
+              navigate('/staylist');
             }}
           >
             내 숙소 확인하기

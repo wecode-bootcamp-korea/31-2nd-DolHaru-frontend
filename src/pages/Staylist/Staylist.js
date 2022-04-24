@@ -36,7 +36,7 @@ const Staylist = () => {
     qsArr.push(queryString);
     const newQueryString = qsArr.join('&');
     navigate(
-      `/user/staylist?${newQueryString}&limit=${LIMIT}&offset=${offsetNumber}`
+      `/staylist?${newQueryString}&limit=${LIMIT}&offset=${offsetNumber}`
     );
   };
 
@@ -45,7 +45,7 @@ const Staylist = () => {
     const index = qsArr.indexOf(deletedUrl);
     qsArr.splice(index, 1);
     const newQueryString = qsArr.join('&');
-    navigate(`/user/staylist?${newQueryString}`);
+    navigate(`/staylist?${newQueryString}`);
   };
 
   const updateOffset = ({ buttonIndex, number }) => {
