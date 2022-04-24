@@ -56,12 +56,12 @@ const Nav = () => {
   };
 
   const goToMain = () => {
-    navigate('/user');
+    navigate('/');
   };
 
   const goToStaylist = () => {
     setIsGuestModalOpen(false);
-    navigate('/user/staylist/');
+    navigate('/staylist');
   };
 
   return (

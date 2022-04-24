@@ -180,7 +180,7 @@ const HostingRouter = () => {
         <MainLeft>
           <Logo
             onClick={() => {
-              navigate('/user');
+              navigate('/');
             }}
           >
             <LogoImg alt="logo" src="/images/Nav/logoW.png" />

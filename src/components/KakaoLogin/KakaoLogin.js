@@ -18,11 +18,11 @@ const KakaoLogin = () => {
       .then(data => {
         if (data.token) {
           localStorage.setItem('dollharu', data.token);
-          navigate('/user');
+          navigate('/');
           alert('로그인에 성공했습니다.');
         } else {
           alert('로그인이 실패하였습니다.');
-          navigate('/user');
+          navigate('/');
         }
       });
   }, [code, accessCode, navigate]);

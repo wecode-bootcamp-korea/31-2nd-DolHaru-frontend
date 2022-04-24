@@ -32,7 +32,7 @@ const Placelist = ({
             <Desc>{description}</Desc>
             <Desc
               onClick={() => {
-                navigate(`/user/staydetail/${stayId}`);
+                navigate(`/staydetail/${stayId}`);
               }}
             >
               {placeName}
